@@ -2902,7 +2902,7 @@ int mmc_can_reset(struct mmc_card *card)
 }
 EXPORT_SYMBOL(mmc_can_reset);
 
-static int mmc_reset(struct mmc_host *host)
+static int _mmc_hw_reset(struct mmc_host *host)
 {
 	struct mmc_card *card = host->card;
 	int ret;
@@ -3042,7 +3042,7 @@ static const struct mmc_bus_ops mmc_ops = {
 	.runtime_resume = mmc_runtime_resume,
 	.alive = mmc_alive,
 	.change_bus_speed = mmc_change_bus_speed,
-	.reset = mmc_reset,
+	.hw_reset = _mmc_hw_reset,
 	.shutdown = mmc_shutdown,
 	.pre_hibernate = mmc_pre_hibernate,
 	.post_hibernate = mmc_post_hibernate
