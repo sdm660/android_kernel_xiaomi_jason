@@ -4126,54 +4126,6 @@ void mmc_stop_host(struct mmc_host *host)
 	mmc_release_host(host);
 }
 
-int mmc_power_save_host(struct mmc_host *host)
-{
-	int ret = 0;
-
-	pr_debug("%s: %s: powering down\n", mmc_hostname(host), __func__);
-
-	mmc_bus_get(host);
-
-	if (!host->bus_ops || host->bus_dead) {
-		mmc_bus_put(host);
-		return -EINVAL;
-	}
-
-	if (host->bus_ops->power_save)
-		ret = host->bus_ops->power_save(host);
-
-	mmc_bus_put(host);
-
-	mmc_power_off(host);
-
-	return ret;
-}
-EXPORT_SYMBOL(mmc_power_save_host);
-
-int mmc_power_restore_host(struct mmc_host *host)
-{
-	int ret;
-
-	pr_debug("%s: %s: powering up\n", mmc_hostname(host), __func__);
-
-	mmc_bus_get(host);
-
-	if (!host->bus_ops || host->bus_dead) {
-		mmc_bus_put(host);
-		return -EINVAL;
-	}
-
-	mmc_power_up(host, host->card->ocr);
-	mmc_claim_host(host);
-	ret = host->bus_ops->power_restore(host);
-	mmc_release_host(host);
-
-	mmc_bus_put(host);
-
-	return ret;
-}
-EXPORT_SYMBOL(mmc_power_restore_host);
-
 /*
  * Add barrier request to the requests in cache
  */
