@@ -293,6 +293,9 @@ struct cgroup {
 
 	/* used to schedule release agent */
 	struct work_struct release_agent_work;
+
+	/* If there is block congestion on this cgroup. */
+	atomic_t congestion_count;
 };
 
 /*
