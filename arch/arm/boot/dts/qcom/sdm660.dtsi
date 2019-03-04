@@ -2769,3 +2769,4 @@
 
 #include "sdm660-mdss.dtsi"
 #include "sdm660-mdss-pll.dtsi"
+#include "../qcom/sdm660-thermal.dtsi"
