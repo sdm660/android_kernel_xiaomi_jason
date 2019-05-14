@@ -26,7 +26,7 @@
 #include <linux/platform_data/gpio-omap.h>
 
 #include <asm/io.h>
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 
 #include <mach/board-ams-delta.h>
 

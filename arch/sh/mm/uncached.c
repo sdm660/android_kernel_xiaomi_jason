@@ -1,6 +1,6 @@
 #include <linux/init.h>
 #include <linux/module.h>
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 #include <asm/page.h>
 #include <asm/addrspace.h>
 

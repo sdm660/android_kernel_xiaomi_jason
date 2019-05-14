@@ -24,7 +24,7 @@
 #include <linux/coredump.h>
 #include <linux/kaiser.h>
 
-#include <asm-generic/sizes.h>
+#include <linux/sizes.h>
 #include <asm/perf_event.h>
 
 #include "perf_event.h"

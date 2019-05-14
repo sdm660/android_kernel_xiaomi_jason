@@ -14,7 +14,7 @@
 #include <linux/serial_8250.h>
 #include <linux/stmmac.h>
 #include <linux/usb/ehci_pdriver.h>
-#include <asm-generic/sizes.h>
+#include <linux/sizes.h>
 
 #include <cpufreq.h>
 #include <loongson1.h>

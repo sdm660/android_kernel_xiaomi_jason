@@ -34,7 +34,7 @@
 #include <linux/basic_mmio_gpio.h>
 
 #include <mach/hardware.h>
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 #include <asm/setup.h>
 #include <asm/mach-types.h>
 #include <asm/mach/arch.h>

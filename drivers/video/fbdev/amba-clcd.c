@@ -34,7 +34,7 @@
 #include <video/of_display_timing.h>
 #include <video/videomode.h>
 
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 
 #define to_clcd(info)	container_of(info, struct clcd_fb, fb)
 

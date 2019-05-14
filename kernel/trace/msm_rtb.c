@@ -25,7 +25,7 @@
 #include <linux/of.h>
 #include <linux/of_address.h>
 #include <linux/io.h>
-#include <asm-generic/sizes.h>
+#include <linux/sizes.h>
 #include <linux/msm_rtb.h>
 #include <asm/timex.h>
 #include <soc/qcom/minidump.h>

@@ -43,7 +43,7 @@
 #include <asm/memory.h>
 #include <asm/sections.h>
 #include <asm/setup.h>
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 #include <asm/tlb.h>
 #include <asm/alternative.h>
 

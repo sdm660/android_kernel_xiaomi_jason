@@ -37,7 +37,7 @@
 #include <linux/of_gpio.h>
 #include <linux/of_device.h>
 
-#include <asm/sizes.h>
+#include <linux/sizes.h>
 
 #include <mach/hardware.h>
 #include <linux/platform_data/mmc-pxamci.h>
