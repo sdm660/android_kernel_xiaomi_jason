@@ -2195,7 +2195,6 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags,
 
 #ifdef CONFIG_SCHED_WALT
 	rq = cpu_rq(task_cpu(p));
-
 	raw_spin_lock(&rq->lock);
 	wallclock = walt_ktime_clock();
 	walt_update_task_ravg(rq->curr, rq, TASK_UPDATE, wallclock, 0);
@@ -2270,10 +2269,13 @@ static void try_to_wake_up_local(struct task_struct *p, struct rq_flags *rf)
 	trace_sched_waking(p);
 
 	if (!task_on_rq_queued(p)) {
+#ifdef CONFIG_SCHED_WALT
 		u64 wallclock = walt_ktime_clock();
 
 		walt_update_task_ravg(rq->curr, rq, TASK_UPDATE, wallclock, 0);
 		walt_update_task_ravg(p, rq, TASK_WAKE, wallclock, 0);
+#endif
+
 		ttwu_activate(rq, p, ENQUEUE_WAKEUP | ENQUEUE_NOCLOCK);
 	}
 
@@ -3486,7 +3488,9 @@ static void __sched notrace __schedule(bool preempt)
 	struct rq_flags rf;
 	struct rq *rq;
 	int cpu;
+#ifdef CONFIG_SCHED_WALT
 	u64 wallclock;
+#endif
 
 	cpu = smp_processor_id();
 	rq = cpu_rq(cpu);
@@ -3547,9 +3551,11 @@ static void __sched notrace __schedule(bool preempt)
 	}
 
         next = pick_next_task(rq, prev, &rf);
+#ifdef CONFIG_SCHED_WALT
 	wallclock = walt_ktime_clock();
 	walt_update_task_ravg(prev, rq, PUT_PREV_TASK, wallclock, 0);
 	walt_update_task_ravg(next, rq, PICK_NEXT_TASK, wallclock, 0);
+#endif
 	clear_tsk_need_resched(prev);
 	clear_preempt_need_resched();
 
