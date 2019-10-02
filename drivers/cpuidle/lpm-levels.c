@@ -1770,11 +1770,11 @@ static int lpm_suspend_enter(suspend_state_t state)
 	cluster_prepare(cluster, cpumask, idx, false, 0);
 
 	/*
-	 * Print the clocks which are enabled during system suspend
-	 * This debug information is useful to know which are the
-	 * clocks that are enabled and preventing the system level
-	 * LPMs(XO and Vmin).
-	 */
+	* Print the clocks which are enabled during system suspend
+	* This debug information is useful to know which are the
+	* clocks that are enabled and preventing the system level
+	* LPMs(XO and Vmin).
+	*/
 	clock_debug_print_enabled();
 
 	BUG_ON(!use_psci);
@@ -1796,7 +1796,6 @@ static int lpm_probe(struct platform_device *pdev)
 {
 	int ret;
 	struct kobject *module_kobj = NULL;
-	struct md_region md_entry;
 
 	get_online_cpus();
 	lpm_root_node = lpm_of_parse_cluster(pdev);
@@ -1853,14 +1852,6 @@ static int lpm_probe(struct platform_device *pdev)
 				__func__);
 		goto failed;
 	}
-
-	/* Add lpm_debug to Minidump*/
-	strlcpy(md_entry.name, "KLPMDEBUG", sizeof(md_entry.name));
-	md_entry.virt_addr = (uintptr_t)lpm_debug;
-	md_entry.phys_addr = lpm_debug_phys;
-	md_entry.size = size;
-	if (msm_minidump_add_region(&md_entry))
-		pr_info("Failed to add lpm_debug in Minidump\n");
 
 	return 0;
 failed:
