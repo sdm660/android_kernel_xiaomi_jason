@@ -35,3 +35,10 @@ config ZRAM_MEMORY_TRACKING
 	  /sys/kernel/debug/zram/zramX/block_state.
 
 	  See Documentation/blockdev/zram.txt for more information.
+
+config ZRAM_DEFAULT_COMP
+	string "Compressed RAM default compressor"
+	depends on ZRAM
+	default "lzo"
+	help
+	  With this feature, you can set the default compressor
