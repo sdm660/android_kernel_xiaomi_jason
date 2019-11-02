@@ -3130,17 +3130,7 @@ static void sdhci_msm_set_clock(struct sdhci_host *host, unsigned int clock)
 
 	curr_pwrsave = !!(readl_relaxed(host->ioaddr +
 	msm_host_offset->CORE_VENDOR_SPEC) & CORE_CLK_PWRSAVE);
-	if ((clock > 400000) &&
-	    !curr_pwrsave && card && mmc_host_may_gate_card(card))
-		writel_relaxed(readl_relaxed(host->ioaddr +
-				msm_host_offset->CORE_VENDOR_SPEC)
-				| CORE_CLK_PWRSAVE, host->ioaddr +
-				msm_host_offset->CORE_VENDOR_SPEC);
-	/*
-	 * Disable pwrsave for a newly added card if doesn't allow clock
-	 * gating.
-	 */
-	else if (curr_pwrsave && card && !mmc_host_may_gate_card(card))
+	if (curr_pwrsave && card)
 		writel_relaxed(readl_relaxed(host->ioaddr +
 				msm_host_offset->CORE_VENDOR_SPEC)
 				& ~CORE_CLK_PWRSAVE, host->ioaddr +
