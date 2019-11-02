@@ -3412,7 +3412,7 @@ static irqreturn_t sdhci_thread_irq(int irq, void *dev_id)
 		sdio_run_irqs(host->mmc);
 
 		spin_lock_irqsave(&host->lock, flags);
-		if (host->flags & SDHCI_SDIO_IRQ_ENABLED) {
+		if (sdio_irq_claimed(host->mmc))
 			if (host->sdio_irq_async_status)
 				host->sdio_irq_async_status = false;
 			sdhci_enable_sdio_irq_nolock(host, true);
@@ -3596,7 +3596,7 @@ int sdhci_runtime_resume_host(struct sdhci_host *host)
 	host->runtime_suspended = false;
 
 	/* Enable SDIO IRQ */
-	if (sdio_irq_claimed(mmc))
+	if (sdio_irq_claimed(host->mmc))
 		sdhci_enable_sdio_irq_nolock(host, true);
 
 	/* Enable Card Detection */
