@@ -15,6 +15,7 @@
 
 #include <linux/module.h>
 #include <linux/firmware.h>
+#include <linux/cpu_input_boost.h>
 #include "msm_sd.h"
 #include "msm_actuator.h"
 #include "msm_cci.h"
@@ -608,6 +609,8 @@ static int32_t msm_actuator_move_focus(
 		pr_err("Step Position Table is NULL\n");
 		return -EINVAL;
 	}
+
+	cpu_input_boost_kick_max(150);
 
 	if ((dest_step_pos == a_ctrl->curr_step_pos) ||
 		((dest_step_pos <= a_ctrl->total_steps) &&
