@@ -3412,7 +3412,7 @@ static irqreturn_t sdhci_thread_irq(int irq, void *dev_id)
 		sdio_run_irqs(host->mmc);
 
 		spin_lock_irqsave(&host->lock, flags);
-		if (sdio_irq_claimed(host->mmc))
+		if (sdio_irq_claimed(host->mmc)) {
 			if (host->sdio_irq_async_status)
 				host->sdio_irq_async_status = false;
 			sdhci_enable_sdio_irq_nolock(host, true);
