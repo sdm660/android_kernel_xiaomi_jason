@@ -28,14 +28,14 @@
 
 		zone@1 {
 			reg = <1>;
-			qcom,silver-khz = <1843200>;
+			qcom,silver-khz = <1747200>;
 			qcom,gold-khz = <1958400>;
 			qcom,trip-deg = <39>;
 		};
 
 		zone@2 {
 			reg = <2>;
-			qcom,silver-khz = <1747200>;
+			qcom,silver-khz = <1536000>;
 			qcom,gold-khz = <1747200>;
 			qcom,trip-deg = <42>;
 		};
