@@ -126,6 +126,7 @@ SCHED_FEAT(STUNE_BOOST_BIAS_BIG, true)
  */
 SCHED_FEAT(MIN_CAPACITY_CAPPING, true)
 
+ /*
  * Inflate the effective utilization of SchedTune-boosted tasks, which
  * generally leads to usage of higher frequencies.
  * If disabled, boosts will only bias tasks to higher-capacity CPUs.
