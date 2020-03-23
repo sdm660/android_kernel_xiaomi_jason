@@ -978,6 +978,8 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 	int l = 0;
 	const char *p = NULL;
 	char *cmdline = data;
+    char *offset_addr;
+    size_t i, len, offset;
 
 	pr_debug("search \"chosen\", depth: %d, uname: %s\n", depth, uname);
 
@@ -1009,6 +1011,18 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 			strlcpy(cmdline, p, min((int)l, COMMAND_LINE_SIZE));
 		}
 	}
+    offset_addr = strstr(cmdline, "console=null");
+    if (offset_addr) {
+        len = strlen(cmdline);
+        offset = offset_addr - cmdline;
+        
+        for (i = 1; i < (len - offset); i++) {
+            if (cmdline[offset + i] == ' ')
+                break;
+        }
+        
+        memmove(offset_addr, &cmdline[offset + i + 1], len - i - offset);
+    }
 
 	pr_debug("Command line is: %s\n", (char*)data);
 
